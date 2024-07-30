@@ -16,3 +16,6 @@ GEMINI_API_KEY=your_gemini_api_key
 5. Run `docker-compose up`
 
 ## Preview
+
+https://github.com/user-attachments/assets/7db0afe5-b0a9-479b-bebe-86a284541e84
+
