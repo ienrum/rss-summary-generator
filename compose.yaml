@@ -1,0 +1,36 @@
+
+services:
+  back:
+    image: chae268/rss-generator-back:latest
+    networks:
+      - my-network
+    ports:
+      - 8000:5000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    secrets:
+      - gemini_api_key
+
+  front:
+    image: chae268/rss-generator-front:latest
+    networks:
+      - my-network
+    environment:
+      NODE_ENV: production
+      API_URL: http://back:5000
+    ports:
+      - 3000:3000
+    depends_on:
+      back:
+        condition: service_started
+
+networks:
+  my-network:
+    driver: bridge
+
+secrets:
+  gemini_api_key:
+    environment: GEMINI_API_KEY
